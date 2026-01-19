@@ -4,3 +4,10 @@ query GetCountries {
     name
   }
 }
+query GetBoards {
+  boards {
+    id
+    name
+    created_at
+  }
+}

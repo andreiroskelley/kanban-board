@@ -23,7 +23,7 @@ export default function SignInPage() {
         if (error) {
           setError(error.message)
         } else {
-          router.push('/boards')
+          router.push('/')
         }
       } else {
         const { error } = await signInEmailPassword(email, password)

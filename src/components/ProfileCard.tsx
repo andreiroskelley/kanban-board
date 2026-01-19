@@ -22,45 +22,18 @@ export default function ProfileCardClient() {
         </div>
         
         {/* Name */}
-        <h2 className="text-xl font-bold text-gray-800 mb-1">Alex Johnson</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-1">Andrei Roskelley</h2>
         <p className="text-gray-600 mb-4">Web Developer</p>
         
         {/* Bio */}
         <p className="text-gray-700 text-sm mb-5 px-2">
-          I create beautiful and functional web applications.
+          Learning web devlelopment and machine learning
         </p>
         
-        {/* Simple Stats */}
-        <div className="flex justify-center gap-6 mb-5">
-          <div>
-            <div className="font-bold text-gray-800">42</div>
-            <div className="text-sm text-gray-500">Projects</div>
-          </div>
-          <div>
-            <div className="font-bold text-gray-800">3</div>
-            <div className="text-sm text-gray-500">Years</div>
-          </div>
-          <div>
-            <div className="font-bold text-gray-800">15</div>
-            <div className="text-sm text-gray-500">Clients</div>
-          </div>
-        </div>
-        
-        {/* Contact Button */}
-        <Button 
-          onClick={handleClick}
-          className="w-full mb-4"
-        >
-          Get in Touch
-        </Button>
+    
 
         {/* Environment info */}
-        <div className="mt-4 p-3 bg-gray-50 rounded text-left">
-          <p className="text-xs text-gray-600">Environment Test:</p>
-          <p className="text-xs font-mono break-all">
-            API: {process.env.NEXT_PUBLIC_API_BASE || 'Not set'}
-          </p>
-        </div>
+     
       </div>
     </div>
   );

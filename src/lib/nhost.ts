@@ -3,16 +3,16 @@
 
 import { NhostClient } from '@nhost/nhost-js'
 
+const subdomain = process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'localhost'
+const region = process.env.NEXT_PUBLIC_NHOST_REGION || 'us-east-1'
+
+console.log('Nhost config:', { subdomain, region })
+
 export const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'localhost',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION || 'local',
-  
-  // Minimum required configuration
+  subdomain,
+  region,
+  // These are important for v3
+  start: true,
   autoSignIn: true,
   autoRefreshToken: true,
-  
-  // Set up GraphQL endpoint
-  graphql: {
-    endpoint: `https://${process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'localhost'}.nhost.run/v1/graphql`
-  }
 })
