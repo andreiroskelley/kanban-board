@@ -421,8 +421,13 @@ const extractErrorMessage = (error: any): string => {
       });
   
       // Try with variables instead of string interpolation
-      const result = await nhost.graphql.request(`
-        mutation AddCard($title: String!, $status: String!, $position: Float!, $board_id: uuid!) {
+      const ADD_CARD_MUTATION = `
+        mutation AddCard(
+          $title: String!, 
+          $status: String!, 
+          $position: float8!, 
+          $board_id: uuid!
+        ) {
           insert_cards_one(object: {
             title: $title,
             status: $status,
@@ -437,14 +442,14 @@ const extractErrorMessage = (error: any): string => {
             board_id
           }
         }
-      `, {
+      `;
+
+      const result = await nhost.graphql.request(ADD_CARD_MUTATION, {
         title: newCardTitle.trim(),
         status: selectedStatus,
-        position,
-        board_id:boardId
+        position: position,  // or just `position` (shorthand)
+        board_id: boardId
       });
-      
-      console.log('📊 Add card result:', JSON.stringify(result, null, 2));
       
       if (result.data?.insert_cards_one) {
         const newCard = result.data.insert_cards_one;

@@ -285,7 +285,7 @@ export default function BoardsListPage() {
         await fetchBoards()
         
         // Redirect to the new board
-        router.push(`/boards/${newBoard.id}`)
+        router.push(`/boards/`)
         
       } else if (result.error) {
         console.error('Create error:', result.error)
@@ -304,6 +304,7 @@ export default function BoardsListPage() {
   const handleDeleteBoard = async (boardId: string, e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
+    console.log('Attempting to delete board:', boardId)
     
     if (!confirm('Are you sure you want to delete this board? All cards will be deleted.')) {
       return
@@ -311,7 +312,12 @@ export default function BoardsListPage() {
     
     try {
       await nhost.graphql.request(`
-        mutation DeleteBoard($boardId: uuid!) {
+        mutation DeleteBoardWithCards($boardId: uuid!) {
+          # Delete all cards associated with this board
+          delete_cards(where: {board_id: {_eq: $boardId}}) {
+            affected_rows
+          }
+          # Then delete the board itself
           delete_boards_by_pk(id: $boardId) {
             id
           }
